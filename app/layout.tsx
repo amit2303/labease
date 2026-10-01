@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     "Test Report Generation",
   ],
   authors: [{ name: "LabEase AI Engineering" }],
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({

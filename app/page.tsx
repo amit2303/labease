@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useRef, MouseEvent } from "react";
+import Image from "next/image";
 import {
   motion,
   useScroll,
@@ -1302,9 +1303,16 @@ export default function LandingPage() {
       <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/[0.08] bg-slate-950/75 backdrop-blur-xl transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-[1px] shadow-lg shadow-cyan-500/20">
-              <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center">
-                <Sparkles className="w-4 h-4 text-cyan-400" />
+            <div className="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/30 to-blue-600/30 p-[1px] shadow-lg shadow-cyan-500/20 group">
+              <div className="w-full h-full bg-slate-950/90 rounded-[11px] flex items-center justify-center overflow-hidden p-1">
+                <Image
+                  src="/logo.png"
+                  alt="LabEase.ai Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(6,182,212,0.6)] transition-transform duration-300 group-hover:scale-110"
+                  priority
+                />
               </div>
             </div>
             <div className="flex items-baseline gap-1.5">
@@ -2199,8 +2207,14 @@ export default function LandingPage() {
       <footer className="relative z-30 border-t border-white/10 bg-slate-950 py-14 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400">
-              <Sparkles className="w-4 h-4" />
+            <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-900/80 border border-cyan-500/30 shadow-md shadow-cyan-500/10 overflow-hidden p-1">
+              <Image
+                src="/logo.png"
+                alt="LabEase.ai Logo"
+                width={36}
+                height={36}
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <span className="text-base font-bold text-white tracking-tight">
