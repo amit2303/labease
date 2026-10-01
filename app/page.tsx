@@ -152,7 +152,7 @@ function GeometricOrbits({ scrollYProgress }: { scrollYProgress: any }) {
           opacity: sphereOpacity,
           transformStyle: "preserve-3d",
         }}
-        className="relative w-[550px] h-[550px] sm:w-[720px] sm:h-[720px]"
+        className="relative w-[320px] h-[320px] sm:w-[550px] sm:h-[550px] lg:w-[720px] lg:h-[720px] opacity-30 sm:opacity-100"
       >
         {/* Outer Glowing Celestial Orbit */}
         <div className="absolute inset-0 rounded-full border border-cyan-500/25 shadow-[0_0_60px_rgba(6,182,212,0.25)] animate-[spin_40s_linear_infinite]" />
@@ -1114,9 +1114,73 @@ function AmbientChemicalFlask() {
   );
 }
 
+/**
+ * Mobile-First: Single clear outline precision caliper schematic in negative space
+ */
+function MobilePrecisionCaliperSchematic() {
+  return (
+    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[300px] h-[90px] pointer-events-none md:hidden opacity-25 z-0">
+      <svg viewBox="0 0 420 120" fill="none" className="w-full h-full stroke-cyan-400">
+        <line x1="30" y1="50" x2="390" y2="50" stroke="#22d3ee" strokeWidth="1.5" />
+        <line x1="30" y1="25" x2="30" y2="85" stroke="#22d3ee" strokeWidth="1.5" />
+        <path d="M 30 85 L 20 90 L 18 70 L 18 50" stroke="#38bdf8" strokeWidth="1.2" />
+        
+        <g stroke="#38bdf8" strokeWidth="1">
+          {Array.from({ length: 28 }).map((_, i) => (
+            <line
+              key={`mob-tick-${i}`}
+              x1={45 + i * 12}
+              y1="50"
+              x2={45 + i * 12}
+              y2={i % 5 === 0 ? "65" : "58"}
+              strokeOpacity={i % 5 === 0 ? 0.9 : 0.4}
+            />
+          ))}
+        </g>
+        
+        <rect x="120" y="38" width="55" height="24" rx="2" stroke="#06b6d4" strokeWidth="1.2" fill="rgba(6, 182, 212, 0.05)" />
+        <line x1="120" y1="50" x2="120" y2="85" stroke="#06b6d4" strokeWidth="1.2" />
+        
+        <text x="260" y="85" fill="#38bdf8" fontSize="8" fontFamily="monospace" opacity="0.8">
+          0.02mm CALIPER SCHEMATIC
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+/**
+ * Mobile-First: Subtle floating background circuit traces
+ */
+function MobileCircuitTraces() {
+  return (
+    <div className="absolute inset-0 pointer-events-none md:hidden opacity-20 z-0 overflow-hidden">
+      <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M -10 140 L 70 140 L 110 180 L 190 180 M 160 90 L 230 90 L 270 50 L 360 50"
+          stroke="#06b6d4"
+          strokeWidth="1"
+          strokeDasharray="4 4"
+          fill="none"
+        />
+        <circle cx="110" cy="180" r="3" fill="#22d3ee" />
+        <circle cx="270" cy="50" r="3" fill="#22d3ee" />
+        <path
+          d="M 20 520 L 90 520 L 130 560 L 260 560"
+          stroke="#3b82f6"
+          strokeWidth="1"
+          strokeDasharray="4 4"
+          fill="none"
+        />
+        <circle cx="130" cy="560" r="3" fill="#3b82f6" />
+      </svg>
+    </div>
+  );
+}
+
 function LowerSectionAmbientInstruments() {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden z-10">
+    <div className="hidden lg:block absolute inset-0 pointer-events-none overflow-hidden z-10">
       <AmbientOscilloscope />
       <AmbientDielectricProbe />
       <AmbientLuxSpectrometer />
@@ -1253,7 +1317,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <a
               href="tel:+918368747244"
               className="hidden lg:flex items-center gap-2 text-xs font-mono text-cyan-400 hover:text-cyan-300 transition-colors px-3 py-1.5 rounded-lg border border-cyan-500/20 bg-cyan-950/20"
@@ -1262,16 +1326,28 @@ export default function LandingPage() {
               <span>+91 8368747244</span>
             </a>
 
-            <MagneticButton
+            {/* Mobile clean text-link: collapsed header, minimal footprint */}
+            <button
               onClick={scrollToWaitlist}
-              className="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-cyan-400/50 cursor-pointer"
+              className="sm:hidden text-xs font-semibold text-cyan-400 hover:text-cyan-300 flex items-center gap-1.5 py-1 px-2.5 rounded-lg bg-cyan-950/50 border border-cyan-500/30 transition-all cursor-pointer shadow-sm"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-300 group-hover:opacity-100 opacity-80" />
-              <div className="relative px-4 py-2 rounded-[11px] bg-slate-950 text-xs sm:text-sm font-semibold text-white transition-all duration-200 group-hover:bg-slate-950/80 flex items-center gap-2 shadow-lg shadow-cyan-500/20">
-                <span>Request Early Access</span>
-                <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
-              </div>
-            </MagneticButton>
+              <span>Request Early Access</span>
+              <ArrowRight className="w-3 h-3 text-cyan-400" />
+            </button>
+
+            {/* Desktop Magnetic CTA button */}
+            <div className="hidden sm:block">
+              <MagneticButton
+                onClick={scrollToWaitlist}
+                className="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none focus:ring-2 focus:ring-cyan-400/50 cursor-pointer"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 transition-all duration-300 group-hover:opacity-100 opacity-80" />
+                <div className="relative px-4 py-2 rounded-[11px] bg-slate-950 text-xs sm:text-sm font-semibold text-white transition-all duration-200 group-hover:bg-slate-950/80 flex items-center gap-2 shadow-lg shadow-cyan-500/20">
+                  <span>Request Early Access</span>
+                  <ArrowRight className="w-3.5 h-3.5 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </MagneticButton>
+            </div>
           </div>
         </div>
       </header>
@@ -1309,24 +1385,32 @@ export default function LandingPage() {
 
           {/* ===================================================================== */}
           {/* 2. ASYMMETRICAL MULTI-DISCIPLINE HOLOGRAPHIC LABORATORY INSTRUMENTS */}
+          {/* Desktop: Full 8-instrument scattered layout */}
+          {/* Mobile: Clean background traces + Single precision caliper outline in negative space */}
           {/* ===================================================================== */}
-          {/* Mechanical / Metrology */}
-          <HolographicVernierCaliper scrollYProgress={smoothProgress} />
-          <HolographicDialGauge scrollYProgress={smoothProgress} />
-          <HolographicMicrometer scrollYProgress={smoothProgress} />
+          <div className="hidden md:contents">
+            {/* Mechanical / Metrology */}
+            <HolographicVernierCaliper scrollYProgress={smoothProgress} />
+            <HolographicDialGauge scrollYProgress={smoothProgress} />
+            <HolographicMicrometer scrollYProgress={smoothProgress} />
 
-          {/* Electrical / High-Voltage Safety */}
-          <HolographicOscilloscope scrollYProgress={smoothProgress} />
-          <HolographicDielectricProbe scrollYProgress={smoothProgress} />
+            {/* Electrical / High-Voltage Safety */}
+            <HolographicOscilloscope scrollYProgress={smoothProgress} />
+            <HolographicDielectricProbe scrollYProgress={smoothProgress} />
 
-          {/* Chemical / Material Analysis */}
-          <HolographicChemicalFlask scrollYProgress={smoothProgress} />
+            {/* Chemical / Material Analysis */}
+            <HolographicChemicalFlask scrollYProgress={smoothProgress} />
 
-          {/* Optical Photometrics (IS 374 / Lux Evaluation) */}
-          <HolographicLuxSpectrometer scrollYProgress={smoothProgress} />
+            {/* Optical Photometrics (IS 374 / Lux Evaluation) */}
+            <HolographicLuxSpectrometer scrollYProgress={smoothProgress} />
 
-          {/* Pneumatic / Hydrostatic Manometer (IP6X / Burst Pressure) */}
-          <HolographicPressureManometer scrollYProgress={smoothProgress} />
+            {/* Pneumatic / Hydrostatic Manometer (IP6X / Burst Pressure) */}
+            <HolographicPressureManometer scrollYProgress={smoothProgress} />
+          </div>
+
+          {/* Mobile Context: Non-overlapping subtle circuit traces & single clean precision caliper outline */}
+          <MobileCircuitTraces />
+          <MobilePrecisionCaliperSchematic />
 
           {/* ===================================================================== */}
           {/* SCENE 1: CINEMATIC HERO */}
@@ -1339,32 +1423,37 @@ export default function LandingPage() {
               y: heroY,
               pointerEvents: heroPointerEvents as any,
             }}
-            className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center z-20 pt-10"
+            className="absolute inset-0 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto text-center z-20 pt-8 sm:pt-10"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-700/60 bg-slate-900/70 backdrop-blur-md shadow-sm mb-6">
-              <Zap className="w-3.5 h-3.5 text-cyan-400" />
-              <span className="text-xs font-medium text-slate-300 tracking-wide">
-                Universal Testing Engine // Electrical • Mechanical • Chemical
+            {/* Top Pill / Badge: Single line, no messy multiline wrapping on mobile */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-slate-700/60 bg-slate-900/80 backdrop-blur-md shadow-sm mb-4 sm:mb-6 max-w-[92vw]">
+              <Zap className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+              <span className="text-[11px] sm:text-xs font-medium text-slate-300 tracking-wide truncate">
+                <span className="hidden sm:inline">Universal Testing Engine // Electrical • Mechanical • Chemical</span>
+                <span className="sm:hidden">Universal AI Testing Engine</span>
               </span>
-              <span className="w-1 h-1 rounded-full bg-slate-600" />
-              <span className="text-xs font-mono text-cyan-400">NABL Ready</span>
+              <span className="w-1 h-1 rounded-full bg-slate-600 shrink-0" />
+              <span className="text-[11px] sm:text-xs font-mono text-cyan-400 shrink-0">NABL Ready</span>
             </div>
 
-            <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white leading-[1.08] max-w-4xl">
+            {/* Headline: responsive mobile scaling with supreme contrast */}
+            <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.12] sm:leading-[1.08] max-w-4xl px-2">
               Autonomous Laboratory Report Generation.{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]">
                 Zero Hallucinations.
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mt-6 sm:mt-8">
+            {/* Subtitle: generous negative space, no instrument collisions */}
+            <p className="text-xs sm:text-base md:text-lg lg:text-xl text-slate-300 max-w-xs sm:max-w-xl md:max-w-3xl mx-auto font-normal leading-relaxed mt-3.5 sm:mt-6 px-1">
               LabEase transforms product specifications and raw test readings into
               fully compliant, audit-ready test reports in seconds—across Indian Standards
               (e.g., IS 374, IS 302), global standards, or custom laboratory SOPs—combining
               semantic AI reasoning with deterministic validation.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
+            {/* Feature Points: Desktop horizontal row (hidden on mobile) */}
+            <div className="hidden md:flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-8 sm:mt-10">
               <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-md text-xs font-medium text-slate-300 shadow-lg">
                 <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
                 <span>Engineered for NABL Accredited Labs</span>
@@ -1379,13 +1468,34 @@ export default function LandingPage() {
               </div>
             </div>
 
+            {/* Feature Points: Mobile-First Single-Column Stacked Feature List (NO overlap, clean vertical layout) */}
+            <div className="flex flex-col w-full max-w-[320px] mx-auto gap-2 mt-5 md:hidden text-left">
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md text-xs font-medium text-slate-200">
+                <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>Engineered for NABL Accredited Labs</span>
+              </div>
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md text-xs font-medium text-slate-200">
+                <FileCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>100% Template Fidelity (.docx)</span>
+              </div>
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md text-xs font-medium text-slate-200">
+                <Binary className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>Deterministic Math Engine</span>
+              </div>
+              <div className="flex items-center gap-2.5 px-3 py-2 rounded-xl border border-white/10 bg-white/[0.04] backdrop-blur-md text-xs font-medium text-slate-200">
+                <ShieldCheck className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <span>Zero Hallucinations Guarantee</span>
+              </div>
+            </div>
+
+            {/* Timeline Scrub Indicator: Simplified for mobile gestures without messy outlines */}
             <motion.div
-              animate={{ y: [0, 8, 0] }}
+              animate={{ y: [0, 6, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="mt-12 flex flex-col items-center gap-2 text-xs font-mono text-slate-400"
+              className="mt-6 sm:mt-10 flex flex-col items-center gap-1.5 text-[11px] sm:text-xs font-mono text-slate-400"
             >
               <span>Scroll to scrub timeline</span>
-              <div className="w-4 h-7 rounded-full border border-cyan-500/40 flex items-start justify-center p-1">
+              <div className="w-3.5 h-6 sm:w-4 sm:h-7 rounded-full border border-cyan-500/40 flex items-start justify-center p-1">
                 <div className="w-1 h-1.5 rounded-full bg-cyan-400 animate-bounce" />
               </div>
             </motion.div>
